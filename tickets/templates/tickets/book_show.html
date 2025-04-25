@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Book Tickets for {{ show.title }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+    <a href="{% url 'tickets:show_detail' pk=show.pk %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
