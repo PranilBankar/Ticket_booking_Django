@@ -1,6 +1,5 @@
-# tickets/urls.py
 from django.urls import path
-from . import views  # Import views like this
+from . import views
 
 app_name = 'tickets'
 
