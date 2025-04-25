@@ -1,0 +1,43 @@
+<!-- tickets/templates/tickets/admin_show_form.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% if object %}Edit{% else %}Add{% endif %} Show</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" value="{{ object.title|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" required>{{ object.description|default:'' }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="date" class="form-label">Date and Time</label>
+        <input type="datetime-local" class="form-control" id="date" name="date" 
+               value="{{ object.date|date:'Y-m-d\TH:i'|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="duration" class="form-label">Duration (minutes)</label>
+        <input type="number" class="form-control" id="duration" name="duration" 
+               value="{{ object.duration.total_seconds|div:60|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="venue" class="form-label">Venue</label>
+        <input type="text" class="form-control" id="venue" name="venue" value="{{ object.venue|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="total_seats" class="form-label">Total Seats</label>
+        <input type="number" class="form-control" id="total_seats" name="total_seats" 
+               value="{{ object.total_seats|default:'' }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="price_per_seat" class="form-label">Price per Seat ($)</label>
+        <input type="number" step="0.01" class="form-control" id="price_per_seat" name="price_per_seat" 
+               value="{{ object.price_per_seat|default:'' }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'admin_show_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
